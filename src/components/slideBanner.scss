@@ -3,3 +3,11 @@
   background-size: cover;
   background-position: center center;
 }
+
+@media (min-width: 1000px) {
+  .slide-banner-section {
+    display: flex;
+    justify-content: center;
+    background-color: whitesmoke;
+  }
+}
