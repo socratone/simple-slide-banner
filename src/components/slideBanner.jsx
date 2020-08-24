@@ -1,17 +1,20 @@
 import React from 'react';
 
+import slideBannerData from '../lib/slideBannerData';
 import './slideBanner.scss';
 import './constantRatio.scss';
 
 const SlideBanner = () => {
 	return (
-		<section class="constant-ratio-parent" >
-			<div class="constant-ratio-child">
-				<article className="slide-banner-article">
-					hello world
-				</article>
+		<section className="slide-banner-section">
+			<div className="constant-ratio-parent">
+				<div className="constant-ratio-child">
+					<article className="slide-banner-article" style={{ backgroundImage: `url(${slideBannerData[0].image})` }}>
+
+					</article>
+				</div>
 			</div>
-		</section >
+		</section>
 	);
 };
 

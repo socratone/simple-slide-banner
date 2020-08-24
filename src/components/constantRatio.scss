@@ -1,12 +1,24 @@
 .constant-ratio-parent {
   position: relative;
-  padding-bottom: 60%;
+  padding-bottom: 35%;
 }
 
-@media (min-width: 525px) {
+@media (min-width: 1000px) {
   .constant-ratio-parent {
     padding-bottom: 0;
-    height: 20rem;
+    height: 22rem;
+    width: 62rem;
+  }
+  .slide-banner-section {
+    display: flex;
+    justify-content: center;
+    background-color: whitesmoke;
+  }
+}
+
+@media (max-width: 750px) {
+  .constant-ratio-parent {
+    padding-bottom: 65%;
   }
 }
 
