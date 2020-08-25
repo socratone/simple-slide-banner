@@ -1,0 +1,12 @@
+.slide-banner__nav-button {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 0.4rem;
+  border: 0;
+  background-color: whitesmoke;
+  margin: 0 0.4rem;
+  &:focus {
+    outline: none;
+    background-color: rgb(196, 196, 196);
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import NavButtons from './navButtons';
 import SlideBannerArticle from './slideBannerArticle';
 import slideBannerData from '../lib/slideBannerData';
 import './slideBanner.scss';
@@ -22,6 +23,7 @@ const SlideBanner = () => {
 
   return (
     <section className="slide-banner">
+      <NavButtons datas={slideBannerData} />
       <div className="slide-banner__constant-ratio-wrapper">
         <div className="slide-banner__constant-ratio-div">
           <div className="slide-banner__article-wrapper" ref={articleWrapper}>
