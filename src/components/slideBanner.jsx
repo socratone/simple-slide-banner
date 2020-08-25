@@ -5,25 +5,33 @@ import SlideBannerArticle from './slideBannerArticle';
 import slideBannerData from '../lib/slideBannerData';
 import './slideBanner.scss';
 
-const articleWrapper = React.createRef();
-
 const SlideBanner = () => {
+  const articleWrapper = React.createRef();
+
   useEffect(() => {
     const dataCount = slideBannerData.length;
-    const bannerWidth = articleWrapper.current.parentElement.offsetWidth;
-    articleWrapper.current.style.width = bannerWidth * dataCount + 'px';
+    articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
     window.onresize = function () {
-      const bannerWidth = articleWrapper.current.parentElement.offsetWidth;
-      articleWrapper.current.style.width = bannerWidth * dataCount + 'px';
+      articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
     };
     return () => {
       window.onresize = function () {};
     };
   }, []);
 
+  const getBannerWidth = () => {
+    return articleWrapper.current.parentElement.offsetWidth;
+  };
+
+  const setBannerOrder = (index) => {
+    articleWrapper.current.children[index].scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <section className="slide-banner">
-      <NavButtons datas={slideBannerData} />
+      <NavButtons datas={slideBannerData} setBannerOrder={setBannerOrder} />
       <div className="slide-banner__constant-ratio-wrapper">
         <div className="slide-banner__constant-ratio-div">
           <div className="slide-banner__article-wrapper" ref={articleWrapper}>
