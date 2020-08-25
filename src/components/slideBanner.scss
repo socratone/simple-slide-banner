@@ -34,7 +34,7 @@
 
   .slide-banner__constant-ratio-wrapper {
     padding-bottom: 0;
-    height: 22rem;
+    height: 22rem; /* 큰 사이즈에서의 세로 높이 조절 */
     width: 100%;
   }
 }
