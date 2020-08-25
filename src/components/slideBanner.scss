@@ -1,11 +1,11 @@
-.slide-banner-article {
+.slide-banner__article {
   height: 100%;
   background-size: cover;
   background-position: center center;
 }
 
 @media (min-width: 1000px) {
-  .slide-banner-section {
+  .slide-banner {
     display: flex;
     justify-content: center;
     background-color: whitesmoke;
