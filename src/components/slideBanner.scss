@@ -1,6 +1,6 @@
 .slide-banner__constant-ratio-wrapper {
   position: relative;
-  padding-bottom: 35%;
+  padding-bottom: 35%; /* 중간 사이즈에서의 세로 높이 조절 */
 }
 
 .slide-banner__constant-ratio-div {
@@ -38,6 +38,6 @@
 
 @media (max-width: 750px) {
   .slide-banner__constant-ratio-wrapper {
-    padding-bottom: 65%;
+    padding-bottom: 65%; /* 작은 사이즈에서의 세로 높이 조절 */
   }
 }
