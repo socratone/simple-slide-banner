@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 import NavButtons from './navButtons';
 import SlideBannerArticle from './slideBannerArticle';
-import slideBannerData from '../lib/slideBannerData';
+import datas from '../lib/slideBannerData';
 import './slideBanner.scss';
 
+const SLIDE_INTERVAL_TIME = 2000;
+
 const articleWrapper = React.createRef();
-let bannerIndex = 0;
+let bannerIndexVar = 0;
 
 const SlideBanner = () => {
-  const [bannerIndexState, setBannerIndex] = useState(0);
+  const [bannerIndex, setBannerIndex] = useState(0);
 
   useEffect(function setArticleWrapperWidth() {
-    const dataCount = slideBannerData.length;
+    const dataCount = datas.length;
     articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
     window.onresize = function () {
       articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
@@ -23,10 +25,10 @@ const SlideBanner = () => {
   }, []);
 
   useEffect(function setAutoSlideArticle() {
-    const lastIndex = slideBannerData.length - 1;
+    const lastIndex = datas.length - 1;
     const id = setInterval(() => {
-      setBannerOrder(lastIndex <= bannerIndex ? 0 : bannerIndex + 1);
-    }, 2000);
+      setBannerOrder(lastIndex <= bannerIndexVar ? 0 : bannerIndexVar + 1);
+    }, SLIDE_INTERVAL_TIME);
     return () => {
       clearInterval(id);
     };
@@ -40,17 +42,21 @@ const SlideBanner = () => {
     articleWrapper.current.children[index].scrollIntoView({
       behavior: 'smooth',
     });
-    bannerIndex = index;
+    bannerIndexVar = index;
     setBannerIndex(index);
   };
 
   return (
     <section className="slide-banner">
-      <NavButtons datas={slideBannerData} setBannerOrder={setBannerOrder} />
+      <NavButtons
+        datas={datas}
+        bannerIndex={bannerIndex}
+        setBannerOrder={setBannerOrder}
+      />
       <div className="slide-banner__constant-ratio-wrapper">
         <div className="slide-banner__constant-ratio-div">
           <div className="slide-banner__article-wrapper" ref={articleWrapper}>
-            {slideBannerData.map((data) => (
+            {datas.map((data) => (
               <SlideBannerArticle key={data.id} data={data} />
             ))}
           </div>
