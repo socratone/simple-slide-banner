@@ -3,16 +3,18 @@ import React from 'react';
 import NavButton from './navButton';
 import './navButtons.scss';
 
-const NavButtons = ({ datas, setBannerOrder }) => {
+const NavButtons = ({ datas, bannerIndex, setBannerOrder }) => {
   return (
     <div className="slide-banner__nav-buttons">
-      {datas.map((data, index) => (
-        <NavButton
-          key={data.id}
-          index={index}
-          setBannerOrder={setBannerOrder}
-        />
-      ))}
+      {datas &&
+        datas.map((data, index) => (
+          <NavButton
+            key={data.id}
+            index={index}
+            bannerIndex={bannerIndex}
+            setBannerOrder={setBannerOrder}
+          />
+        ))}
     </div>
   );
 };
