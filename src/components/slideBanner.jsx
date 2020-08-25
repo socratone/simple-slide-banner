@@ -6,10 +6,11 @@ import slideBannerData from '../lib/slideBannerData';
 import './slideBanner.scss';
 
 const articleWrapper = React.createRef();
-
 let bannerIndex = 0;
 
 const SlideBanner = () => {
+  const [bannerIndexState, setBannerIndex] = useState(0);
+
   useEffect(function setArticleWrapperWidth() {
     const dataCount = slideBannerData.length;
     articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
@@ -22,9 +23,9 @@ const SlideBanner = () => {
   }, []);
 
   useEffect(function setAutoSlideArticle() {
-    const dataCount = slideBannerData.length;
+    const lastIndex = slideBannerData.length - 1;
     const id = setInterval(() => {
-      setBannerOrder(dataCount - 1 <= bannerIndex ? 0 : bannerIndex + 1);
+      setBannerOrder(lastIndex <= bannerIndex ? 0 : bannerIndex + 1);
     }, 2000);
     return () => {
       clearInterval(id);
@@ -40,6 +41,7 @@ const SlideBanner = () => {
       behavior: 'smooth',
     });
     bannerIndex = index;
+    setBannerIndex(index);
   };
 
   return (
