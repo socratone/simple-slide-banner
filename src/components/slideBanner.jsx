@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import NavButtons from './navButtons';
 import SlideBannerArticle from './slideBannerArticle';
 import slideBannerData from '../lib/slideBannerData';
 import './slideBanner.scss';
 
-const SlideBanner = () => {
-  const articleWrapper = React.createRef();
+const articleWrapper = React.createRef();
 
-  useEffect(() => {
+let bannerIndex = 0;
+
+const SlideBanner = () => {
+  useEffect(function setArticleWrapperWidth() {
     const dataCount = slideBannerData.length;
     articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
     window.onresize = function () {
@@ -16,6 +18,16 @@ const SlideBanner = () => {
     };
     return () => {
       window.onresize = function () {};
+    };
+  }, []);
+
+  useEffect(function setAutoSlideArticle() {
+    const dataCount = slideBannerData.length;
+    const id = setInterval(() => {
+      setBannerOrder(dataCount - 1 <= bannerIndex ? 0 : bannerIndex + 1);
+    }, 2000);
+    return () => {
+      clearInterval(id);
     };
   }, []);
 
@@ -27,6 +39,7 @@ const SlideBanner = () => {
     articleWrapper.current.children[index].scrollIntoView({
       behavior: 'smooth',
     });
+    bannerIndex = index;
   };
 
   return (
