@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import SlideBannerArticle from './slideBannerArticle';
 import slideBannerData from '../lib/slideBannerData';
 import './slideBanner.scss';
-import './constantRatio.scss';
 
 const articleWrapper = React.createRef();
 
