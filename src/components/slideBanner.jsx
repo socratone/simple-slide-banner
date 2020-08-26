@@ -10,6 +10,7 @@ const SLIDE_MOVING_SPEED = 15;
 
 const articleWrapper = React.createRef();
 let bannerIndexVar = 0;
+let loopId;
 let slideId;
 
 const SlideBanner = () => {
@@ -27,13 +28,17 @@ const SlideBanner = () => {
     };
   }, []);
 
-  useEffect(function setAutoSlideArticle() {
+  const setAutoSlideArticle = () => {
     const endIndex = datas.length - 1;
-    const id = setInterval(() => {
+    loopId = setInterval(() => {
       setBannerOrder(endIndex <= bannerIndexVar ? 0 : bannerIndexVar + 1);
     }, SLIDE_INTERVAL_TIME);
+  };
+
+  useEffect(() => {
+    setAutoSlideArticle();
     return () => {
-      clearInterval(id);
+      clearInterval(loopId);
       clearInterval(slideId);
     };
   }, []);
@@ -89,8 +94,20 @@ const SlideBanner = () => {
     }, 1);
   };
 
+  const handleMouseOver = () => {
+    clearInterval(loopId);
+  };
+
+  const handleMouseLeave = () => {
+    setAutoSlideArticle();
+  };
+
   return (
-    <section className="slide-banner">
+    <section
+      className="slide-banner"
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
+    >
       <NavButtons
         datas={datas}
         bannerIndex={bannerIndex}
