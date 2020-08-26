@@ -29,7 +29,7 @@ const SlideBannerArticle = ({ data }) => {
       </div>
       <div className="silde-banner__column2">
         <div className="silde-banner__column2-area">
-          <i class="fab fa-react"></i>
+          <i className="fab fa-react"></i>
         </div>
       </div>
       <div className="slide-banner__column3">
