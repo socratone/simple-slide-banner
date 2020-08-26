@@ -9,7 +9,6 @@ const SLIDE_INTERVAL_TIME = 2000;
 
 const articleWrapper = React.createRef();
 let bannerIndexVar = 0;
-let scrollLeftVar = 0;
 
 const SlideBanner = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
@@ -27,9 +26,9 @@ const SlideBanner = () => {
   }, []);
 
   useEffect(function setAutoSlideArticle() {
-    const lastIndex = datas.length - 1;
+    const endIndex = datas.length - 1;
     const id = setInterval(() => {
-      setBannerOrder(lastIndex <= bannerIndexVar ? 0 : bannerIndexVar + 1);
+      setBannerOrder(endIndex <= bannerIndexVar ? 0 : bannerIndexVar + 1);
     }, SLIDE_INTERVAL_TIME);
     return () => {
       clearInterval(id);
@@ -41,11 +40,31 @@ const SlideBanner = () => {
   };
 
   const setBannerOrder = (index) => {
-    scrollLeftVar = getBannerWidth() * index;
-    articleWrapper.current.parentElement.scrollLeft = scrollLeftVar;
+    if (index === 0) setAnimationToSlideAtEnd();
+    else setAnimationToSlide(getBannerWidth() * index);
 
     bannerIndexVar = index;
     setBannerIndex(index);
+  };
+
+  const setAnimationToSlide = (scrollLeft) => {
+    const id = setInterval(() => {
+      const slider = articleWrapper.current.parentElement;
+      slider.scrollLeft += 10;
+      if (slider.scrollLeft >= scrollLeft) {
+        clearInterval(id);
+      }
+    }, 1);
+  };
+
+  const setAnimationToSlideAtEnd = () => {
+    const id = setInterval(() => {
+      const slider = articleWrapper.current.parentElement;
+      slider.scrollLeft -= datas.length * 10;
+      if (slider.scrollLeft === 0) {
+        clearInterval(id);
+      }
+    }, 1);
   };
 
   return (
