@@ -10,8 +10,8 @@ const SlideBannerArticle = ({ data }) => {
         backgroundImage: `url(${data.image})`,
       }}
     >
-      <div className="slide-banner__column-1-wrapper">
-        <div className="slide-banner__column-1">
+      <div className="slide-banner__column1">
+        <div className="slide-banner__column1-area">
           <h2 style={{ fontSize: '2rem', margin: 0 }}>제목을 지어주세요</h2>
           <p>부제목도 있어야 해요</p>
           <button
@@ -27,12 +27,18 @@ const SlideBannerArticle = ({ data }) => {
           </button>
         </div>
       </div>
-      <div className="silde-banner__column-2-wrapper"></div>
-      <ul className="slide-banner__column-3-wrapper">
-        <li>잘 지내세요</li>
-        <li>만나서 반가워요</li>
-        <li>얼마나 오래됐나요</li>
-        <li>밥은 먹고 다녀요</li>
+      <div className="silde-banner__column2">
+        <div className="silde-banner__column2-area">
+          <i class="fab fa-react"></i>
+        </div>
+      </div>
+      <ul className="slide-banner__column3">
+        <div>
+          <li>잘 지내세요</li>
+          <li>만나서 반가워요</li>
+          <li>얼마나 오래됐나요</li>
+          <li>밥은 먹고 다녀요</li>
+        </div>
       </ul>
     </article>
   );
