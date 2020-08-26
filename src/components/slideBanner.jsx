@@ -6,11 +6,11 @@ import datas from '../lib/slideBannerData';
 import './slideBanner.scss';
 
 const SLIDE_INTERVAL_TIME = 2000;
-const SLIDE_MOVING_SPEED = 10;
+const SLIDE_MOVING_SPEED = 15;
 
 const articleWrapper = React.createRef();
 let bannerIndexVar = 0;
-let animationId;
+let slideId;
 
 const SlideBanner = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
@@ -20,7 +20,7 @@ const SlideBanner = () => {
     articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
     window.onresize = function () {
       articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
-      setBannerOrder(bannerIndexVar);
+      // setBannerOrder(bannerIndexVar);
     };
     return () => {
       window.onresize = function () {};
@@ -34,6 +34,7 @@ const SlideBanner = () => {
     }, SLIDE_INTERVAL_TIME);
     return () => {
       clearInterval(id);
+      clearInterval(slideId);
     };
   }, []);
 
@@ -50,29 +51,42 @@ const SlideBanner = () => {
   };
 
   const setAnimationToSlide = (index) => {
+    // const slider = articleWrapper.current.parentElement;
+    // slider.scrollLeft = getBannerWidth() * index;
+    console.log('index:', index);
+    console.log('getBannerWidth() * index:', getBannerWidth() * index);
+    clearInterval(slideId);
     const slider = articleWrapper.current.parentElement;
-    slider.scrollLeft = getBannerWidth() * index;
-    // animationId = setInterval(() => {
-    //   const slider = articleWrapper.current.parentElement;
-    //   slider.scrollLeft += SLIDE_MOVING_SPEED;
-    //   if (slider.scrollLeft >= getBannerWidth() * index) {
-    //     slider.scrollLeft = getBannerWidth() * index;
-    //     clearInterval(animationId);
-    //   }
-    // }, 1);
+    slider.scrollLeft = getBannerWidth() * (index - 1);
+    slideId = setInterval(() => {
+      const slider = articleWrapper.current.parentElement;
+      slider.scrollLeft += SLIDE_MOVING_SPEED;
+      if (slider.scrollLeft >= getBannerWidth() * index) {
+        slider.scrollLeft = getBannerWidth() * index;
+        clearInterval(slideId);
+      }
+    }, 1);
   };
 
   const setAnimationToSlideAtEnd = () => {
+    // const slider = articleWrapper.current.parentElement;
+    // slider.scrollLeft = 0;
+    console.log('index:', '0');
+    console.log(
+      'getBannerWidth() * index:',
+      getBannerWidth() * (datas.length - 1)
+    );
+    clearInterval(slideId);
     const slider = articleWrapper.current.parentElement;
-    slider.scrollLeft = 0;
-    // animationId = setInterval(() => {
-    //   const slider = articleWrapper.current.parentElement;
-    //   slider.scrollLeft -= datas.length * SLIDE_MOVING_SPEED;
-    //   if (slider.scrollLeft <= 0) {
-    //     slider.scrollLeft = 0;
-    //     clearInterval(animationId);
-    //   }
-    // }, 1);
+    slider.scrollLeft = getBannerWidth() * (datas.length - 1);
+    slideId = setInterval(() => {
+      const slider = articleWrapper.current.parentElement;
+      slider.scrollLeft -= datas.length * SLIDE_MOVING_SPEED;
+      if (slider.scrollLeft <= 0) {
+        slider.scrollLeft = 0;
+        clearInterval(slideId);
+      }
+    }, 1);
   };
 
   return (
