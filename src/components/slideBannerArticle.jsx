@@ -32,14 +32,16 @@ const SlideBannerArticle = ({ data }) => {
           <i class="fab fa-react"></i>
         </div>
       </div>
-      <ul className="slide-banner__column3">
-        <div>
-          <li>잘 지내세요</li>
-          <li>만나서 반가워요</li>
-          <li>얼마나 오래됐나요</li>
-          <li>밥은 먹고 다녀요</li>
+      <div className="slide-banner__column3">
+        <div className="slide-banner__column3-area">
+          <ul>
+            <li>잘 지내세요</li>
+            <li>만나서 반가워요</li>
+            <li>얼마나 오래됐나요</li>
+            <li>밥은 먹고 다녀요</li>
+          </ul>
         </div>
-      </ul>
+      </div>
     </article>
   );
 };
