@@ -2,20 +2,15 @@ import React from 'react';
 
 import './navButton.scss';
 
-const SELECTED_BUTTON_COLOR = 'rgb(196, 196, 196)';
-
 const NavButton = ({ index, bannerIndex, setBannerOrder }) => {
   const isMatchIndex = () => {
-    if (index === bannerIndex) {
-      return { backgroundColor: SELECTED_BUTTON_COLOR };
-    }
-    return { backgroundColor: '' };
+    if (index === bannerIndex) return ' slide-banner__nav-button--selected';
+    return '';
   };
 
   return (
     <button
-      className="slide-banner__nav-button"
-      style={isMatchIndex()}
+      className={`slide-banner__nav-button${isMatchIndex()}`}
       onClick={() => setBannerOrder(index)}
     ></button>
   );

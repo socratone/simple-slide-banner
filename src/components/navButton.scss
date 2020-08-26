@@ -5,7 +5,19 @@
   border: 0;
   background-color: whitesmoke;
   margin: 0 0.4rem;
+  transform: scale(0.8);
+  transition: transform 0.3s, background-color 0.3s;
+
+  &:hover {
+    cursor: pointer;
+  }
+
   &:focus {
     outline: none;
+  }
+
+  &--selected {
+    background-color: rgb(196, 196, 196);
+    transform: scale(1);
   }
 }
