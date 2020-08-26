@@ -43,32 +43,36 @@ const SlideBanner = () => {
 
   const setBannerOrder = (index) => {
     if (index === 0) setAnimationToSlideAtEnd();
-    else setAnimationToSlide(getBannerWidth() * index);
+    else setAnimationToSlide(index);
 
     bannerIndexVar = index;
     setBannerIndex(index);
   };
 
-  const setAnimationToSlide = (scrollLeft) => {
-    animationId = setInterval(() => {
-      const slider = articleWrapper.current.parentElement;
-      slider.scrollLeft += SLIDE_MOVING_SPEED;
-      if (slider.scrollLeft >= scrollLeft) {
-        slider.scrollLeft = scrollLeft;
-        clearInterval(animationId);
-      }
-    }, 1);
+  const setAnimationToSlide = (index) => {
+    const slider = articleWrapper.current.parentElement;
+    slider.scrollLeft = getBannerWidth() * index;
+    // animationId = setInterval(() => {
+    //   const slider = articleWrapper.current.parentElement;
+    //   slider.scrollLeft += SLIDE_MOVING_SPEED;
+    //   if (slider.scrollLeft >= getBannerWidth() * index) {
+    //     slider.scrollLeft = getBannerWidth() * index;
+    //     clearInterval(animationId);
+    //   }
+    // }, 1);
   };
 
   const setAnimationToSlideAtEnd = () => {
-    animationId = setInterval(() => {
-      const slider = articleWrapper.current.parentElement;
-      slider.scrollLeft -= datas.length * SLIDE_MOVING_SPEED;
-      if (slider.scrollLeft <= 0) {
-        slider.scrollLeft = 0;
-        clearInterval(animationId);
-      }
-    }, 1);
+    const slider = articleWrapper.current.parentElement;
+    slider.scrollLeft = 0;
+    // animationId = setInterval(() => {
+    //   const slider = articleWrapper.current.parentElement;
+    //   slider.scrollLeft -= datas.length * SLIDE_MOVING_SPEED;
+    //   if (slider.scrollLeft <= 0) {
+    //     slider.scrollLeft = 0;
+    //     clearInterval(animationId);
+    //   }
+    // }, 1);
   };
 
   return (
