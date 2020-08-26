@@ -12,8 +12,8 @@ const SlideBannerArticle = ({ data }) => {
     >
       <div className="slide-banner__column1">
         <div className="slide-banner__column1-area">
-          <h2 style={{ fontSize: '2rem', margin: 0 }}>제목을 지어주세요</h2>
-          <p>부제목도 있어야 해요</p>
+          <h2 style={{ fontSize: '2rem', margin: 0 }}>{data.title}</h2>
+          <p>{data.subTitle}</p>
           <button
             style={{
               padding: '0.7rem',
