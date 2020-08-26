@@ -10,6 +10,7 @@ const SLIDE_MOVING_SPEED = 10;
 
 const articleWrapper = React.createRef();
 let bannerIndexVar = 0;
+let animationId;
 
 const SlideBanner = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
@@ -49,23 +50,23 @@ const SlideBanner = () => {
   };
 
   const setAnimationToSlide = (scrollLeft) => {
-    const id = setInterval(() => {
+    animationId = setInterval(() => {
       const slider = articleWrapper.current.parentElement;
       slider.scrollLeft += SLIDE_MOVING_SPEED;
       if (slider.scrollLeft >= scrollLeft) {
         slider.scrollLeft = scrollLeft;
-        clearInterval(id);
+        clearInterval(animationId);
       }
     }, 1);
   };
 
   const setAnimationToSlideAtEnd = () => {
-    const id = setInterval(() => {
+    animationId = setInterval(() => {
       const slider = articleWrapper.current.parentElement;
       slider.scrollLeft -= datas.length * SLIDE_MOVING_SPEED;
       if (slider.scrollLeft <= 0) {
         slider.scrollLeft = 0;
-        clearInterval(id);
+        clearInterval(animationId);
       }
     }, 1);
   };
