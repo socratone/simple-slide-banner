@@ -53,6 +53,7 @@ const SlideBanner = () => {
       const slider = articleWrapper.current.parentElement;
       slider.scrollLeft += SLIDE_MOVING_SPEED;
       if (slider.scrollLeft >= scrollLeft) {
+        slider.scrollLeft = scrollLeft;
         clearInterval(id);
       }
     }, 1);
@@ -62,7 +63,8 @@ const SlideBanner = () => {
     const id = setInterval(() => {
       const slider = articleWrapper.current.parentElement;
       slider.scrollLeft -= datas.length * SLIDE_MOVING_SPEED;
-      if (slider.scrollLeft === 0) {
+      if (slider.scrollLeft <= 0) {
+        slider.scrollLeft = 0;
         clearInterval(id);
       }
     }, 1);
