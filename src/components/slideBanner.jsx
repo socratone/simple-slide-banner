@@ -6,6 +6,7 @@ import datas from '../lib/slideBannerData';
 import './slideBanner.scss';
 
 const SLIDE_INTERVAL_TIME = 2000;
+const SLIDE_MOVING_SPEED = 10;
 
 const articleWrapper = React.createRef();
 let bannerIndexVar = 0;
@@ -50,7 +51,7 @@ const SlideBanner = () => {
   const setAnimationToSlide = (scrollLeft) => {
     const id = setInterval(() => {
       const slider = articleWrapper.current.parentElement;
-      slider.scrollLeft += 10;
+      slider.scrollLeft += SLIDE_MOVING_SPEED;
       if (slider.scrollLeft >= scrollLeft) {
         clearInterval(id);
       }
@@ -60,7 +61,7 @@ const SlideBanner = () => {
   const setAnimationToSlideAtEnd = () => {
     const id = setInterval(() => {
       const slider = articleWrapper.current.parentElement;
-      slider.scrollLeft -= datas.length * 10;
+      slider.scrollLeft -= datas.length * SLIDE_MOVING_SPEED;
       if (slider.scrollLeft === 0) {
         clearInterval(id);
       }
