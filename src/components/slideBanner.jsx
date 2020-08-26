@@ -9,6 +9,7 @@ const SLIDE_INTERVAL_TIME = 2000;
 
 const articleWrapper = React.createRef();
 let bannerIndexVar = 0;
+let scrollLeftVar = 0;
 
 const SlideBanner = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
@@ -40,9 +41,9 @@ const SlideBanner = () => {
   };
 
   const setBannerOrder = (index) => {
-    articleWrapper.current.children[index].scrollIntoView({
-      behavior: 'smooth',
-    });
+    scrollLeftVar = getBannerWidth() * index;
+    articleWrapper.current.parentElement.scrollLeft = scrollLeftVar;
+
     bannerIndexVar = index;
     setBannerIndex(index);
   };
