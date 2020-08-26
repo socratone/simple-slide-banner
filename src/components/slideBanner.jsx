@@ -18,6 +18,7 @@ const SlideBanner = () => {
     articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
     window.onresize = function () {
       articleWrapper.current.style.width = getBannerWidth() * dataCount + 'px';
+      setBannerOrder(bannerIndexVar);
     };
     return () => {
       window.onresize = function () {};
